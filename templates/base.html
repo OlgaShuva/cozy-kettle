@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}The Cozy Kettle{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --brown-dark: #5c3a21;
+            --brown-medium: #7a5c3c;
+            --brown-light: #d4a76a;
+            --cream: #f9f3e9;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--cream);
+            color: var(--brown-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Стили для шапки */
+        .top-nav {
+            background-color: var(--brown-dark);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            color: var(--cream);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-logo:hover {
+            color: var(--brown-light);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-link:hover {
+            color: var(--brown-light);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--brown-light);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Стиль для кнопки входа/регистрации */
+        .auth-btn {
+            background-color: var(--brown-medium);
+            color: var(--cream);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid var(--brown-light);
+        }
+
+        .auth-btn:hover {
+            background-color: var(--brown-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: var(--brown-dark);
+            margin-bottom: 15px;
+        }
+
+        .alert {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .alert-error {
+            background-color: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #c62828;
+        }
+
+        .alert-success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #2e7d32;
+        }
+
+        /* Стили для нового футера */
+        .footer {
+            background-color: var(--brown-dark);
+            color: var(--cream);
+            padding: 50px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .footer-column {
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--cream);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--brown-light);
+            color: var(--cream);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--brown-light);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--cream);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--brown-light);
+        }
+
+        .subscribe-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .subscribe-form input {
+            padding: 10px;
+            border: 1px solid var(--brown-light);
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.9);
+        }
+
+        .subscribe-form button {
+            background-color: var(--brown-medium);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .subscribe-form button:hover {
+            background-color: var(--brown-dark);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <nav class="top-nav">
+    <div class="nav-container">
+        <a href="{{ url_for('home') }}" class="nav-logo">The Cozy Kettle</a>
+        <div class="nav-menu">
+            <a href="{{ url_for('home') }}" class="nav-link">Главная</a>
+            <a href="{{ url_for('menu') }}" class="nav-link">Меню</a>
+            <a href="{{ url_for('about') }}" class="nav-link">О нас</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('account') }}" class="nav-link">Личный кабинет</a>
+                <a href="{{ url_for('logout') }}" class="auth-btn">Выйти</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="auth-btn">Вход / Регистрация</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+    <!-- Основное содержимое -->
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block header %}
+        <header class="page-header">
+            <h1 class="page-title">{% block page_title %}{% endblock %}</h1>
+        </header>
+        {% endblock %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Новый красивый футер -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <span class="footer-logo">The Cozy Kettle</span>
+                <p>Уютная кофейня с лучшими сортами кофе и домашней выпечкой. Мы создаем атмосферу тепла и комфорта для наших гостей.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Меню</h3>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('menu') }}">Кофейная карта</a></li>
+                    <li><a href="{{ url_for('menu') }}">Десерты</a></li>
+                    <li><a href="{{ url_for('menu') }}">Завтраки</a></li>
+                    <li><a href="{{ url_for('menu') }}">Сезонные предложения</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> Москва, Лубянский пр-д, 27/1с</li>
+                    <li><i class="fas fa-phone"></i> +7 (495) 123-45-67</li>
+                    <li><i class="fas fa-envelope"></i> info@cozykettle.ru</li>
+                    <li><i class="fas fa-clock"></i> Пн-Вс: 8:00 - 22:00</li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Подписаться</h3>
+                <p>Узнавайте первыми о новых напитках и акциях:</p>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Ваш email" required>
+                    <button type="submit">Подписаться</button>
+                </form>
+                <p style="margin-top: 15px; font-size: 0.9rem;">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 The Cozy Kettle. Все права защищены.</p>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

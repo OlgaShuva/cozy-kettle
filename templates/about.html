@@ -1,0 +1,326 @@
+{% extends "base.html" %}
+
+{% block title %}The Cozy Kettle | О нашей кофейне{% endblock %}
+
+{% block styles %}
+<style>
+    /* Специальные стили для страницы "О нас" */
+    .about-hero {
+        background: linear-gradient(rgba(92, 58, 33, 0.7), rgba(122, 92, 60, 0.7)),
+                    url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        margin-bottom: 60px;
+    }
+
+    .hero-title {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        animation: fadeInDown 1s ease;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+        max-width: 800px;
+        margin: 0 auto;
+        animation: fadeInUp 1s ease;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: var(--brown-dark);
+        margin-bottom: 50px;
+        position: relative;
+    }
+
+    .section-title:after {
+        content: '';
+        display: block;
+        width: 100px;
+        height: 3px;
+        background: var(--brown-light);
+        margin: 15px auto;
+    }
+
+    .about-section {
+        padding: 80px 0;
+    }
+
+    .story-container {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        margin-bottom: 80px;
+    }
+
+    .story-text {
+        flex: 1;
+    }
+
+    .story-image {
+        flex: 1;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: transform 0.5s ease;
+    }
+
+    .story-image:hover {
+        transform: scale(1.03);
+    }
+
+    .story-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+    .value-card {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .value-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .value-icon {
+        font-size: 3rem;
+        color: var(--brown-light);
+        margin-bottom: 20px;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 50px;
+    }
+
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        aspect-ratio: 1 / 1;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.1);
+    }
+
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+    .team-member {
+        text-align: center;
+    }
+
+    .member-photo {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 20px;
+        border: 5px solid var(--brown-light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .member-name {
+        font-size: 1.3rem;
+        color: var(--brown-dark);
+        margin-bottom: 5px;
+    }
+
+    .member-role {
+        color: var(--brown-medium);
+        font-style: italic;
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .story-container {
+            flex-direction: column;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Герой-секция -->
+<section class="about-hero">
+    <div>
+        <h1 class="hero-title">Наша история</h1>
+        <p class="hero-subtitle">Маленькая кофейня с большим сердцем в самом центре Москвы</p>
+    </div>
+</section>
+
+<!-- Основной контент -->
+<div class="container">
+    <!-- История -->
+    <section class="about-section">
+        <div class="story-container">
+            <div class="story-text">
+                <h2 class="section-title">Как все начиналось</h2>
+                <p>В 2015 году Аня и Макс, два страстных любителя кофе, решили создать место, где каждый почувствует себя как дома. После путешествия по кофейным плантациям Колумбии и Эфиопии они вдохновились на создание The Cozy Kettle.</p>
+                <p>Начав с маленького помещения на 20 квадратных метрах, сегодня мы стали любимым местом для сотен гостей ежедневно. Но наша философия осталась прежней — качественный кофе, домашняя атмосфера и внимание к деталям.</p>
+            </div>
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Основатели кофейни">
+            </div>
+        </div>
+
+        <div class="story-container">
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Интерьер кофейни">
+            </div>
+            <div class="story-text">
+                <h2 class="section-title">Наше пространство</h2>
+                <p>Каждый уголок нашей кофейни продуман до мелочей. Мы используем натуральные материалы — дерево, камень и лён, чтобы создать атмосферу уюта и тепла.</p>
+                <p>Особой гордостью является наша библиотека с коллекцией книг о кофе и путешествиях, а также каминный зал, где зимой так приятно согреться с чашкой фирменного какао.</p>
+                <p>Для тех, кто работает — есть удобные розетки у каждого стола и быстрый Wi-Fi. А для тех, кто хочет отдохнуть — мягкие диваны и тихая музыка.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Наши ценности -->
+    <section class="about-section" style="background: var(--cream);">
+        <div class="container">
+            <h2 class="section-title">Наши принципы</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-seedling"></i></div>
+                    <h3>Экологичность</h3>
+                    <p>Мы используем только биоразлагаемую упаковку, сортируем отходы и поддерживаем местных фермеров</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-coffee"></i></div>
+                    <h3>Качество кофе</h3>
+                    <p>Отборные зерна, ручная обжарка и профессиональные бариста — наш кофе проходит 12 ступеней контроля качества</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Гостеприимство</h3>
+                    <p>Для нас каждый гость — друг. Мы помним ваши любимые напитки и всегда рады поболтать за чашкой кофе</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-book"></i></div>
+                    <h3>Образование</h3>
+                    <p>Проводим мастер-классы по латте-арту и дегустации, чтобы делиться нашей страстью к кофе</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Галерея -->
+    <section class="about-section">
+    <div class="container">
+        <h2 class="section-title">Наш уют в фотографиях</h2>
+        <div class="gallery">
+             <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Бариста готовит ароматный кофе">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Арт-латте с красивым рисунком">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Теплый интерьер с деревянной мебелью">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Утренний свет в кофейне">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Домашние десерты на деревянной доске">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Гости за чтением книг">
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Команда -->
+    <section class="about-section" style="background: var(--cream);">
+        <div class="container">
+            <h2 class="section-title">Наша команда</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Аня" class="member-photo">
+                    <h3 class="member-name">Аня</h3>
+                    <p class="member-role">Основатель, главный бариста</p>
+                    <p>"Кофе — это искусство, которым я живу уже 10 лет"</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Макс" class="member-photo">
+                    <h3 class="member-name">Макс</h3>
+                    <p class="member-role">Основатель, шеф-пекарь</p>
+                    <p>"Мои круассаны — это любовь с первого укуса"</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Оля" class="member-photo">
+                    <h3 class="member-name">Оля</h3>
+                    <p class="member-role">Менеджер</p>
+                    <p>"Создаю атмосферу, в которую хочется возвращаться"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
