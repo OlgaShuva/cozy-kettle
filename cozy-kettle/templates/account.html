@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+
+{% block title %}The Cozy Kettle | Личный кабинет{% endblock %}
+
+{% block content %}
+<section class="account-section">
+    <h1>Добро пожаловать, {{ user.username }}!</h1>
+<div class="account-card">
+    <div class="account-info">
+        <p><strong>Имя пользователя:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        {% if user.phone %}<p><strong>Телефон:</strong> {{ user.phone }}</p>{% endif %}
+        {% if user.address %}<p><strong>Адрес:</strong> {{ user.address }}</p>{% endif %}
+    </div>
+</div>
+
+<div class="account-card">
+    <h2> style="color: var(--brown-medium); margin-top: 0;">История заказов</h2>
+    <div class="orders">
+        <p>Здесь будет история ваших заказов...</p>
+    </div>
+</div>
+</section>
+{% endblock %}
