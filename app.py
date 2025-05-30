@@ -1,8 +1,6 @@
 
-from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from models import User, db
+from flask import Flask, render_template, request, redirect, url_for, flash
+from extensions import db, login_manager
 import os
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
@@ -10,9 +8,12 @@ app.config['SECRET_KEY'] = os.urandom(24)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Инициализация расширений
 db.init_app(app)
-login_manager = LoginManager(app)
+login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+from models import User  # Импорт после инициализации
 
 @login_manager.user_loader
 def load_user(user_id):
